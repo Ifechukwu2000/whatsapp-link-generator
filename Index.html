@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Link Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      padding: 2rem;
+      color: #333;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #25D366;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.8rem;
+      width: 100%;
+      background-color: #25D366;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    #result {
+      margin-top: 2rem;
+      word-break: break-all;
+      background: #e9f5ec;
+      padding: 1rem;
+      border-radius: 6px;
+      display: none;
+    }
+    .small {
+      font-size: 0.9rem;
+      color: gray;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>WhatsApp Link Generator</h1>
+
+  <label for="phone">Phone Number (with country code):</label>
+  <input type="text" id="phone" placeholder="+2348123456789" />
+
+  <label for="message">Custom Message:</label>
+  <textarea id="message" rows="4" placeholder="Hello, I'm interested in your product."></textarea>
+
+  <button onclick="generateLink()">Generate Link</button>
+
+  <div id="result">
+    <strong>Your WhatsApp Link:</strong>
+    <p id="linkText"></p>
+    <button onclick="copyLink()">Copy Link</button>
+    <a id="testLink" href="#" target="_blank" style="display:block; margin-top:1rem; text-align:center;">Test Link</a>
+  </div>
+
+  <p class="small">Built by You • Free to use</p>
+
+  <!-- Evadav Popunder Ad Code (Replace with your real code) -->
+  <script type="text/javascript" src="https://go.evadav.com/your_ad_code_here.js"></script>
+
+  <script>
+    function generateLink() {
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!phone || !message) {
+        alert("Please enter both phone number and message.");
+        return;
+      }
+
+      const encodedMsg = encodeURIComponent(message);
+      const link = `https://wa.me/${phone.replace('+', '')}?text=${encodedMsg}`;
+
+      document.getElementById('linkText').textContent = link;
+      document.getElementById('testLink').href = link;
+      document.getElementById('result').style.display = 'block';
+    }
+
+    function copyLink() {
+      const text = document.getElementById('linkText').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Link copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
